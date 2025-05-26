@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: url("bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .terminal-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .terminal-window {
+    background-color: black;
+    border: none;
+    border-radius: 10px;
+    width: 900px;
+    max-width: 100%;
+    min-height: 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  }
+  
+  .window-bar {
+    background-color: #111;
+    border-radius: 10px 10px 0 0;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 0.9rem;
+  }
+  
+  .window-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 15px; /* moved dots a bit to the right */
+  }
+  
+  .red-dot, .yellow-dot, .green-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  
+  .red-dot { background: #ff605c; }
+  .yellow-dot { background: #ffbd44; }
+  .green-dot { background: #00ca56; }
+  
+  .window-title {
+    text-align: center;
+    flex-grow: 1;
+    margin-left: -60px;
+    color: #ccc;
+  }
+  
+  .terminal-output {
+    padding: 1rem;    
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1.05rem;
+    color: white;
+    overflow-y: auto;
+  }
+  
+  .prompt {
+    color: #aaa;
+    margin-right: 0.5rem;
+    white-space: nowrap;
+  }
+  
+  .green {
+    color: #00ff00;
+  }
+  
+  .output {
+    color: #00ff00;
+    white-space: pre-wrap;
+  }
+  
+  .error {
+    color: #ff4c4c;
+    white-space: pre-wrap;
+  }
+  
+  .line {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 1.05rem;
+  }
+  
+  #terminal-input {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    font-family: monospace;
+    font-size: inherit;
+    caret-color: transparent;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .blinker {
+    width: 8px;
+    height: 1.4em;
+    background: white;
+    animation: blink 1s steps(1) infinite;
+    margin-left: 2px;
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    top: 0;
+  }
+
+@keyframes crt-shutdown {
+  0% {
+    filter: brightness(1) contrast(1);
+    opacity: 1;
+  }
+  100% {
+    filter: brightness(0) contrast(12) saturate(0);
+    opacity: 0;
+  }
+}
+
+.crt-shutdown {
+  animation: crt-shutdown 1.2s ease forwards;
+  pointer-events: none;
+  user-select: none;
+}
+ 
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
