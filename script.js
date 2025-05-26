@@ -36,8 +36,8 @@ const commands = {
     tech-stack
       Displays My Tech Stack 
       Example: tech-stack
-  
-  Note: Commands are case-sensitive. Type them exactly as shown`,
+
+Note: Commands are case-sensitive. Type them exactly as shown`,
     ls: "about.md  projects.md  faq.md",
     "cat about.md": "I'm nullsec0x — a developer who loves low-level things, good UI, and breaking + building stuff.",
     "cat projects.md": `# Projects
@@ -115,10 +115,8 @@ const commands = {
 `,
 
   exit: () => {
-    // Start CRT shutdown animation on body
     document.body.classList.add('crt-shutdown');
   
-    // After the animation (1.2s), show the error face & text (no background)
     setTimeout(() => {
       document.body.innerHTML = `
         <div style="
@@ -143,11 +141,10 @@ const commands = {
         </div>
       `;
   
-      // Redirect to about:blank after 3 seconds
       setTimeout(() => {
         window.location.href = 'about:blank';
       }, 3000);
-    }, 1200); // Match to your crt-shutdown animation duration
+    }, 1200); 
   },  
 
   
@@ -267,7 +264,6 @@ function appendLine(content, className = "") {
 }
 
 function processCommand(command) {
-  // Remove startup message if present
   const startMsg = terminal.querySelector('p.green');
   if (startMsg) startMsg.remove();
 
@@ -291,8 +287,17 @@ function processCommand(command) {
     appendLine(`nullsec0x.dev: command not found: ${command}`, "error");
   }
 
-  // Auto-scroll to bottom after output is added
   setTimeout(() => terminal.scrollTop = terminal.scrollHeight, 0);
+
+  scrollToBottom();
+  
+}
+
+function scrollToBottom() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
 }
 
 input.addEventListener("keydown", e => {
@@ -329,17 +334,15 @@ input.addEventListener("keydown", e => {
       updateBlinker();
     }, 0);
   }
-}); // <-- FIXED missing closing paren and semicolon here
+});
 
 input.addEventListener("input", updateBlinker);
 input.addEventListener("click", updateBlinker);
 input.addEventListener("keyup", updateBlinker);
 
-// Focus input on any key press anywhere
 document.addEventListener("keydown", () => input.focus());
 
 window.addEventListener("load", () => {
-  // Add startup message once on load
   const startMsg = document.createElement('p');
   startMsg.className = 'green';
   startMsg.textContent = "type 'help' to get started";

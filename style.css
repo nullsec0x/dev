@@ -10,16 +10,18 @@
     font-family: monospace;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+    padding-top: 3rem;
+    padding-bottom: 5rem; 
+    min-height: 100vh;
+    flex-direction: column;
+  }  
   
   .terminal-wrapper {
     width: 100%;
     display: flex;
     justify-content: center;
     padding: 2rem;
-  }
+  }  
   
   .terminal-window {
     background-color: black;
@@ -68,14 +70,13 @@
   }
   
   .terminal-output {
-    padding: 1rem;    
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     font-size: 1.05rem;
     color: white;
-    overflow-y: auto;
-  }
+  }  
   
   .prompt {
     color: #aaa;
@@ -124,7 +125,7 @@
     animation: blink 1s steps(1) infinite;
     margin-left: 2px;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     pointer-events: none;
     top: 0;
   }
