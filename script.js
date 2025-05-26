@@ -33,6 +33,10 @@ const commands = {
       Opens my GitHub profile
       Example: github
   
+    tech-stack
+      Displays My Tech Stack 
+      Example: tech-stack
+  
   Note: Commands are case-sensitive. Type them exactly as shown`,
     ls: "about.md  projects.md  faq.md",
     "cat about.md": "I'm nullsec0x — a developer who loves low-level things, good UI, and breaking + building stuff.",
@@ -66,6 +70,13 @@ const commands = {
   
   **Q: Fun fact?**
   A: I love my twinkpad more than anything :)`,
+
+  "tech-stack": `Nullsec0x’s Tech Stack 💻
+  - Languages: JavaScript, Python, C++, CSS
+  - Frameworks: React, Node.js
+  - OS: Linux (obviously)
+  - Hardware: twinkpad, tinkering and more!`,
+
     whoami: "user: nullsec0x\nrole: script kiddie fullstack dev wannabe\nlocation: The Cloud",
     github: () => window.open("https://github.com/nullsec0x", "_blank"),
     clear: "clear",
