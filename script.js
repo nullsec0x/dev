@@ -49,7 +49,17 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   ## Proposal Website  
   She won't say no I PROMISE.  
   https://nullsec0x.github.io/-3/
-  
+
+  ## Bac National Exam And Average Calculator
+  Made this because math is hard and my brain said "nah" during finals. And cuz other tools SUCK, THE UI IS ASS AND LOTS OF ADS
+  It works tho. Trust. (No warranty if you cry) 
+  https://nullsec0x.github.io/bac/
+
+  ## Korean Cafe Menu
+  Built a fake cafe website because I was hungry and bored.
+  Plays jazz. Has vibes. No food tho. Starving.
+  https://nullsec0x.github.io/cafe/
+
   More projects available on my GitHub https://github.com/nullsec0x!`,
     "cat faq.md": `# FAQ
   
