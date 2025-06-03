@@ -87,8 +87,7 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
 
     whoami: "user: nullsec0x\nrole: script kiddie fullstack dev wannabe\nlocation: The Cloud",
     github: () => window.open("https://github.com/nullsec0x", "_blank"),
-    clear: "clear",
-  
+    clear: "clear",    
 
   fraisazwina: `
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -151,8 +150,8 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   
       setTimeout(() => {
         window.location.href = 'about:blank';
-      }, 3000);
-    }, 1200); 
+      }, 1000);
+    }, 1000); 
   },  
 
   
@@ -176,7 +175,75 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
                                        Temperature: 54°C (avg)
                                        Battery: N/A
   `,
-"sudo rm -rf /": () => {
+
+"./cube.sh": () => {
+    const cubeContainer = document.createElement('div');
+    cubeContainer.id = 'cube-transition-container';
+    cubeContainer.style.display = 'none';
+    cubeContainer.innerHTML = `
+        <style>
+            #cube-transition-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #121212;
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.8s ease-out;
+            }
+            #cube-transition-container.show {
+                opacity: 1;
+            }
+            #cube-transition-container iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+        </style>
+        <iframe src="cube.html" id="cube-iframe"></iframe>
+    `;
+    document.body.appendChild(cubeContainer);
+    
+    document.querySelector('.terminal-window').style.opacity = '0';
+    document.querySelector('.terminal-window').style.transition = 'opacity 0.5s ease-out';
+    
+    setTimeout(() => {
+        cubeContainer.style.display = 'block';
+        setTimeout(() => {
+            cubeContainer.classList.add('show');
+            document.querySelector('.terminal-window').style.display = 'none';
+        }, 50);
+    }, 500);
+    
+    const escHandler = (e) => {
+        if (e.key === 'Escape') {
+            cubeContainer.classList.remove('show');
+            
+            setTimeout(() => {
+                cubeContainer.style.display = 'none';
+                document.querySelector('.terminal-window').style.display = 'flex';
+                setTimeout(() => {
+                    document.querySelector('.terminal-window').style.opacity = '1';
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: document.body.scrollHeight,
+                            behavior: 'smooth'
+                        });
+                        input.focus();
+                    }, 50);
+                }, 50);
+                
+                document.removeEventListener('keydown', escHandler);
+            }, 800);
+        }
+    };
+    
+    document.addEventListener('keydown', escHandler);
+},
+
+"sudo rm -rf --no-preserve-root /": () => {
   input.disabled = true;
 
   const lines = [
@@ -207,9 +274,27 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
     "Segmentation fault (core dumped)",
 
   ];
+  
+  function updateBlinker() {
+    const style = getComputedStyle(input);
+    const font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+    const text = input.value.substring(0, input.selectionStart);
+  
+    const span = document.createElement("span");
+    span.style.position = "absolute";
+    span.style.visibility = "hidden";
+    span.style.whiteSpace = "pre";
+    span.style.font = font;
+    span.textContent = text.replace(/ /g, "\u00a0");
+    document.body.appendChild(span);
+    const caretLeft = span.getBoundingClientRect().width;
+    document.body.removeChild(span);
+  
+    blinker.style.left = `${input.offsetLeft + caretLeft + 2}px`;
+  }
+  
 
   let i = 0;
-
   function printNextLine() {
     if (i < lines.length) {
       appendLine(lines[i], "error");
@@ -269,6 +354,12 @@ function appendLine(content, className = "") {
   line.className = className;
   line.textContent = content;
   terminal.insertBefore(line, input.parentElement);
+}
+
+function addOutputLine(text) {
+  const line = document.createElement("div");
+  line.textContent = text;
+  terminal.appendChild(line);
 }
 
 function processCommand(command) {
