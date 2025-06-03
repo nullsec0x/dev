@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Cube Demo</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            background: #1e1e1e;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #main-container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            align-items: center;
+        }
+        
+        #cube-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #quote-container {
+            flex: 1;
+            padding-left: 50px; 
+        }
+        
+        #scene {
+            width: 500px;
+            height: 500px;
+        }
+        
+        #quote {
+            font-size: 2rem;
+            line-height: 1.4;
+            color: #00ff00;
+            border-left: 3px solid #00ff00;
+            padding-left: 20px;
+            max-width: 400px;
+            white-space: pre-wrap;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 2rem;
+            background: #00ff00;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
+        #exit-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ff00;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <div id="cube-container">
+            <div id="scene"></div>
+        </div>
+        <div id="quote-container">
+            <div id="quote"></div>
+        </div>
+    </div>
+    <div id="exit-text">[Press ESC To Exit]</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            antialias: true, 
+            alpha: true,
+            powerPreference: "high-performance"
+        });
+        renderer.setSize(500, 500);
+        document.getElementById('scene').appendChild(renderer.domElement);
+        
+        const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+        const edges = new THREE.EdgesGeometry(geometry);
+        const lineMaterial = new THREE.LineBasicMaterial({ 
+            color: 0x00ff00,
+            linewidth: 2
+        });
+        const cube = new THREE.LineSegments(edges, lineMaterial);
+        scene.add(cube);
+        
+        camera.position.z = 3;
+        
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        
+        let isRotating = true;
+        let autoRotateSpeed = 0.005;
+        controls.addEventListener('start', () => isRotating = false);
+        controls.addEventListener('end', () => isRotating = true);
+        
+        const quote = "Talk is cheap. Show me the code.\n- Linus Torvalds";
+        const quoteElement = document.getElementById('quote');
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < quote.length) {
+                let currentText = quote.substring(0, i+1);
+                quoteElement.innerHTML = currentText.replace(/\n/g, '<br>') + 
+                                       '<span class="cursor"></span>';
+                i++;
+                setTimeout(typeWriter, Math.random() * 50 + 50);
+            } else {
+                quoteElement.innerHTML = quote.replace(/\n/g, '<br>') + 
+                                       '<span class="cursor"></span>';
+            }
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (isRotating) {
+                cube.rotation.x += autoRotateSpeed;
+                cube.rotation.y += autoRotateSpeed * 0.7;
+            }
+            
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        
+        typeWriter();
+        animate();
+    </script>
+</body>
+</html>
