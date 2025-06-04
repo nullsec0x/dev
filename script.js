@@ -44,21 +44,21 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   
   ## Random Meme Generator  
   A fun tool that generates random memes on the fly. (made by Laformatik <3)  
-  https://nullsec0x.github.io/
+  <a href="https://nullsec0x.github.io/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/</a>
   
   ## Proposal Website  
   She won't say no I PROMISE.  
-  https://nullsec0x.github.io/-3/
+  <a href="https://nullsec0x.github.io/-3/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/-3/</a>
 
   ## Bac National Exam And Average Calculator
   Made this cuz math is pain and other tools have trash UI and ads. (It works tho.)
-  https://nullsec0x.github.io/bac/
+  <a href="https://nullsec0x.github.io/bac/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/bac/</a>
 
   ## Korean Cafe Menu
   Built a fake cafe website because I was hungry and bored. No food, just jazz.
-  https://nullsec0x.github.io/cafe/
+  <a href="https://nullsec0x.github.io/cafe/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/cafe/</a>
 
-  More projects available on my GitHub https://github.com/nullsec0x!`,
+  More projects available on my <a href="https://github.com/nullsec0x" target="_blank" style="text-decoration: underline; color: inherit;">GitHub</a>!`,
     "cat faq.md": `# FAQ
   
   **Q: Who is nullsec0x?**
@@ -352,7 +352,23 @@ function updateBlinker() {
 function appendLine(content, className = "") {
   const line = document.createElement("p");
   line.className = className;
-  line.textContent = content;
+  
+  const hasHTML = /<[a-z][\s\S]*>/i.test(content);
+  
+  if (hasHTML) {
+    const sanitized = content.replace(/<(?!\/?(a|b|i|u|strong|em|br|span|code)(?=>|\s.*>))\/?.*?>/g, '');
+    line.innerHTML = sanitized;
+    
+    const links = line.querySelectorAll('a');
+    links.forEach(link => {
+      link.target = '_blank';
+      link.style.color = 'inherit';
+      link.style.textDecoration = 'underline';
+    });
+  } else {
+    line.textContent = content;
+  }
+  
   terminal.insertBefore(line, input.parentElement);
 }
 
