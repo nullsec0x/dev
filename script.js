@@ -457,6 +457,37 @@ input.addEventListener("keyup", updateBlinker);
 
 document.addEventListener("keydown", () => input.focus());
 
+function initMobileFeatures() {
+  if ('ontouchstart' in window || navigator.maxTouchPoints) {
+    const keyboardToggle = document.createElement('button');
+    keyboardToggle.className = 'mobile-keyboard-toggle';
+    keyboardToggle.innerHTML = '⌨️';
+    keyboardToggle.onclick = () => {
+      input.focus();
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+      }, 300);
+    };
+    document.body.appendChild(keyboardToggle);
+    
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (event) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+    
+    input.style.minHeight = '44px';
+  }
+}
+
+initMobileFeatures();
+
 window.addEventListener("load", () => {
   const startMsg = document.createElement('p');
   startMsg.className = 'green';
@@ -464,5 +495,5 @@ window.addEventListener("load", () => {
   terminal.insertBefore(startMsg, input.parentElement);
 
   input.focus();
-  updateBlinker();
+  updateBlinker()
 });
