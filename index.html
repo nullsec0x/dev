@@ -8,41 +8,54 @@
   <link rel="stylesheet" href="style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <style id="mobile-overrides">
-  @media (max-width: 768px) and (hover: none) {
+  @media (max-width: 768px), (hover: none) {
+    body {
+      padding: 0.5rem !important;
+      min-height: 100vh !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: flex-start !important; 
+    }
+
+    .terminal-wrapper {
+      width: 100% !important;
+      max-width: 92vw !important; 
+      padding: 0 !important;
+      margin: 0 auto !important;
+    }
+
     .terminal-window {
-      width: 95% !important;
-      margin: 0 auto;
+      width: 100% !important;
+      max-width: 100% !important;
+      transform: none !important; 
+      border-radius: 8px !important;
     }
-    
+
+    .window-bar, 
+    .terminal-output {
+      padding: 0.6rem !important; 
+    }
+
+    .window-title, 
+    .terminal-output, 
     #terminal-input {
-      font-size: 16px !important;
-      min-width: 80%;
+      font-size: clamp(12px, 3.5vw, 14px) !important; 
     }
-    
-    .blinker {
-      height: 1.6em !important;
+
+    #terminal-input {
+      min-height: 44px !important;
     }
-    
-    .mobile-keyboard-toggle {
-      display: block;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #333;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-      z-index: 100;
-      opacity: 0.7;
+
+    html {
+      touch-action: manipulation;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
   }
-  
-  @media (min-width: 769px), (hover: hover) {
-    .mobile-keyboard-toggle {
-      display: none !important;
+
+  @media (max-width: 320px) {
+    .terminal-wrapper {
+      max-width: 95vw !important;
     }
   }
 </style>
