@@ -85,7 +85,7 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   - OS: Linux (obviously)
   - Hardware: twinkpad, tinkering and more!`,
 
-    whoami: "user: nullsec0x\nrole: script kiddie fullstack dev wannabe\nlocation: The Cloud",
+    whoami: "user: nullsec0x\nrole: script kiddie fullstack dev wannabe\nlocation: the cloud",
 
     github: () => window.open("https://github.com/nullsec0x", "_blank"),
 
