@@ -86,8 +86,17 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   - Hardware: twinkpad, tinkering and more!`,
 
     whoami: "user: nullsec0x\nrole: script kiddie fullstack dev wannabe\nlocation: The Cloud",
+
     github: () => window.open("https://github.com/nullsec0x", "_blank"),
+
     clear: "clear",    
+
+    "sudo -su": `Nice try, but I don’t trust you with root access.
+    Try 'sudo make me a sandwich' instead.`,
+
+    nullsec0x: "yup! that's me :D",
+
+    echo: (input) => input,
 
   fraisazwina: `
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -147,13 +156,34 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
           </p>
         </div>
       `;
-  
-      setTimeout(() => {
-        window.location.href = 'about:blank';
-      }, 1000);
+        setTimeout(() => {
+            window.close(); 
+            if(!window.closed) {
+                window.location.href = 'about:blank';
+            }
+        }, 1000);
     }, 1000); 
-  },  
+}, 
 
+    "sudo make me a sandwich": () => {
+    appendLine(`What? Make it yourself.`, "output");
+    appendLine(`
+                     _.---._
+                _.-~       ~-._
+            _.-~               ~-._
+        _.-~                       ~---._
+    _.-~                                 ~\\
+ .-~                                    _.;
+ :-._                               _.-~ ./
+ }-._~-._                   _..__.-~ _.-~)
+ \`-._~-._~-._              / .__..--~_.-~
+     ~-._~-._\\.        _.-~_/ _..--~~
+         ~-. \\\`--...--~_.-~/~~
+            \\.\`--...--~_.-~
+              ~-..----~
+    `, "output");
+    appendLine(`(But fine... here's a sandwich anyway. Enjoy!)`, "output");
+},
   
   
     neofetch: `
@@ -387,6 +417,14 @@ function processCommand(command) {
   terminal.insertBefore(commandLine, input.parentElement);
 
   if (command === "") return;
+
+  if (command.startsWith("echo ")) {
+        const textToEcho = command.substring(5); 
+        appendLine(textToEcho, "output");
+        setTimeout(() => terminal.scrollTop = terminal.scrollHeight, 0);
+        scrollToBottom();
+        return;
+    }
 
   const output = commands[command];
 
