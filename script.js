@@ -92,7 +92,7 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
     clear: "clear",    
 
     "sudo -su": `Nice try, but I don’t trust you with root access.
-    Try 'sudo make me a sandwich' instead.`,
+Try 'sudo make me a sandwich' instead.`,
 
     nullsec0x: "yup! that's me :D",
 
@@ -191,7 +191,7 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⡿⠀⠀⠀⠀⠀⠀          ------------------------
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀          OS: NullSecOS 13.37 Enterprise
   ⠀⠀⠀⢀⣠⣤⣤⣤⣀⣀⠈⠋⠉⣁⣠⣤⣤⣤⣀⡀⠀⠀          Kernel: 6.2.9-secure-rt
-  ⠀⢠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀          Uptime: 72 days, 14 hours, 42 mins
+  ⠀⢠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀          Uptime: 113 days, 21 hours, 57 mins
   ⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠀         Packages: 3127 (apt)
   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀         Shell: zsh 5.9
   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀         Resolution: 7680x4320 (8K UHD)
