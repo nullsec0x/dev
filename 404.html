@@ -14,6 +14,7 @@
       padding: 2rem;
       min-height: 100vh;
       align-items: center;
+      flex-direction: column;
     }
     
     .error-terminal {
@@ -85,19 +86,23 @@
     
     .return-link {
       margin-top: 2rem;
-      display: inline-block;
       color: #00ff00;
       text-decoration: none;
       font-size: 1.2rem;
-      border: 1px solid #00ff00;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
+      font-family: monospace;
       transition: all 0.3s ease;
+      position: relative;
+      padding-bottom: 2px;
     }
     
     .return-link:hover {
-      background: #00ff00;
-      color: black;
+      text-decoration: underline;
+    }
+    
+    .return-link::after {
+      content: '_';
+      animation: blink 1s steps(1) infinite;
+      margin-left: 2px;
     }
   </style>
 </head>
@@ -125,10 +130,9 @@
           <span class="error-prompt">nullsec0x@error ~ %</span> 
           <span id="error-command"></span><span class="blink">_</span>
         </div>
-        
-        <a href="/" class="return-link">Return to Terminal</a>
       </div>
     </div>
+    <a href="https://nullsec0x.github.io/dev" class="return-link">[Return to Terminal]</a>
   </div>
 
   <script>
@@ -181,5 +185,4 @@
     
     setTimeout(typeErrorCommand, 1000);
   </script>
-</body>
 </html>
