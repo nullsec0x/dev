@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Not Found</title>
+  <link rel="icon" href="icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .error-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+      min-height: 100vh;
+      align-items: center;
+    }
+    
+    .error-terminal {
+      background-color: black;
+      border: none;
+      border-radius: 10px;
+      width: 900px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    }
+    
+    .error-content {
+      padding: 2rem;
+      color: #e06c75;
+      font-family: monospace;
+      text-align: center;
+    }
+    
+    .error-content h1 {
+      font-size: 8rem;
+      margin-bottom: 0;
+      user-select: none;
+    }
+    
+    .error-content h2 {
+      font-size: 3rem;
+      margin: 0 0 1rem;
+      user-select: none;
+    }
+    
+    .error-content p {
+      font-size: 1.5rem;
+      margin: 0;
+      user-select: none;
+    }
+    
+    .error-details {
+      font-size: 1rem;
+      margin-top: 1rem;
+      color: #abb2bf;
+      user-select: none;
+    }
+    
+    .error-command {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #111;
+      border-radius: 5px;
+      color: #00ff00;
+      font-family: monospace;
+      text-align: left;
+    }
+    
+    .error-prompt {
+      color: #aaa;
+      margin-right: 0.5rem;
+    }
+    
+    .blink {
+      animation: blink 1s steps(1) infinite;
+    }
+    
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    
+    .return-link {
+      margin-top: 2rem;
+      display: inline-block;
+      color: #00ff00;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: 1px solid #00ff00;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .return-link:hover {
+      background: #00ff00;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container">
+    <div class="error-terminal">
+      <div class="window-bar">
+        <div class="window-controls">
+          <div class="red-dot"></div>
+          <div class="yellow-dot"></div>
+          <div class="green-dot"></div>
+        </div>
+        <div class="window-title">nullsec0x — ERROR 404</div>
+      </div>
+      <div class="error-content">
+        <h1>:(</h1>
+        <h2>ERROR 404</h2>
+        <p>Page Not Found</p>
+        <div class="error-details">
+          The requested resource could not be found.<br>
+          System has been terminated due to critical error.
+        </div>
+        
+        <div class="error-command">
+          <span class="error-prompt">nullsec0x@error ~ %</span> 
+          <span id="error-command"></span><span class="blink">_</span>
+        </div>
+        
+        <a href="/" class="return-link">Return to Terminal</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const commands = [
+      "sudo rm -rf /",
+      "curl -X DELETE /",
+      "git reset --hard HEAD",
+      "chmod 000 /",
+      "dd if=/dev/zero of=/dev/sda",
+      "rm -rf node_modules/ package-lock.json",
+      ":(){ :|:& };:",
+      "mkfs.ext4 /dev/sda1",
+      "killall -9",
+      "shutdown -h now"
+    ];
+    
+    let i = 0;
+    let j = 0;
+    let currentCommand = '';
+    let isDeleting = false;
+    let commandIndex = 0;
+    
+    function typeErrorCommand() {
+      if (commandIndex >= commands.length) commandIndex = 0;
+      
+      const fullCommand = commands[commandIndex];
+      
+      if (!isDeleting && i <= fullCommand.length) {
+        currentCommand = fullCommand.substring(0, i);
+        i++;
+        if (i > fullCommand.length) {
+          isDeleting = true;
+          setTimeout(typeErrorCommand, 2000);
+          return;
+        }
+      } else if (isDeleting && i >= 0) {
+        currentCommand = fullCommand.substring(0, i);
+        i--;
+        if (i === 0) {
+          isDeleting = false;
+          commandIndex++;
+          setTimeout(typeErrorCommand, 500);
+          return;
+        }
+      }
+      
+      document.getElementById('error-command').textContent = currentCommand;
+      setTimeout(typeErrorCommand, Math.random() * 50 + 50);
+    }
+    
+    setTimeout(typeErrorCommand, 1000);
+  </script>
+</body>
+</html>
