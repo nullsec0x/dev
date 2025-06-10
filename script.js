@@ -58,6 +58,14 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   Built a fake cafe website because I was hungry and bored. No food, just jazz.
   <a href="https://nullsec0x.github.io/cafe/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/cafe/</a>
 
+  ## WatchWhat!  
+  Can’t pick a movie? Spin the wheel and get a banger by vibe, year, or rating.  
+  <a href="https://nullsec0x.github.io/watchwhat" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/watchwhat</a>
+
+  ## What Is My IP Address?  
+  No ads, no trackers, just your IP — clean, simple, sickass-styled.  
+  <a href="https://nullsec0x.github.io/ipadress/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/ipadress/</a>
+
   More projects available on my <a href="https://github.com/nullsec0x" target="_blank" style="text-decoration: underline; color: inherit;">GitHub</a>!`,
     "cat faq.md": `# FAQ
   
