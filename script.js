@@ -76,7 +76,7 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   A: Fullstack development, shell scripting, and some serious codecraft.
   
   **Q: How can I reach you?**
-  A: Drop me a line at nullsec0x@proton.me or find me on GitHub and Reddit.
+  A: Drop me a line at <a href="mailto:nullsec0x@proton.me" style="text-decoration: underline;">nullsec0x@proton.me</a> or find me on GitHub and Reddit.  
   
   **Q: Are you open to freelance work?**
   A: Yep! Always looking for cool projects to contribute to.
