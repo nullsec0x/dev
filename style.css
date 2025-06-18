@@ -4,17 +4,16 @@
     box-sizing: border-box;
   }
   
-  body {
-    background: url("bg.jpg") no-repeat center center fixed;
-    background-size: cover;
-    font-family: monospace;
-    display: flex;
-    justify-content: center;
-    padding-top: 3rem;
-    padding-bottom: 5rem; 
-    min-height: 100vh;
-    flex-direction: column;
-  }  
+body {
+  background-color: #1e1e1e;
+  font-family: monospace;
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  min-height: 100vh;
+  flex-direction: column;
+} 
   
   .terminal-wrapper {
     width: 100%;
