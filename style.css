@@ -3,7 +3,11 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
+
+html { cursor: url("https://mac-cursors.netlify.app/svg/default.svg"), auto; }
+input { cursor: url("https://mac-cursors.netlify.app/svg/textcursor.svg"), auto; }
+a { cursor: url("https://mac-cursors.netlify.app/svg/handpointing.svg"), auto; }
+
 body {
   background-color: #1e1e1e;
   font-family: monospace;
