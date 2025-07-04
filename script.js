@@ -67,8 +67,8 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   <a href="https://nullsec0x.github.io/ipadress/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/ipadress/</a>
 
   ## FocusFi  
- Helps you get stuff done… once your task list looks good.
- <a href="https://nullsec0x.github.io/focusfi" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/focusfi</a>
+  Helps you get stuff done… once your task list looks good.
+  <a href="https://nullsec0x.github.io/focusfi" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/focusfi</a>
 
   More projects available on my <a href="https://github.com/nullsec0x" target="_blank" style="text-decoration: underline; color: inherit;">GitHub</a>!`,
     "cat faq.md": `# FAQ
