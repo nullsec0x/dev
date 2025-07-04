@@ -66,6 +66,10 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   No ads, no trackers, just your IP — clean, simple, sickass-styled.  
   <a href="https://nullsec0x.github.io/ipadress/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/ipadress/</a>
 
+  ## FocusFi  
+  Finally, a dashboard that helps you get things done… right after rearranging your task list for aesthetic.
+  <a href="https://nullsec0x.github.io/focusfi" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/focusfi</a>
+
   More projects available on my <a href="https://github.com/nullsec0x" target="_blank" style="text-decoration: underline; color: inherit;">GitHub</a>!`,
     "cat faq.md": `# FAQ
   
