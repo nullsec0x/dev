@@ -60,7 +60,6 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
     - Repo: <a href="https://github.com/nullsec0x/sysinfo" target="_blank" style="text-decoration: underline; color: inherit;">https://github.com/nullsec0x/sysinfo</a>
     - My role: wrote all of it
     - Made it to finals. Solid run.
-
     `,
 
     "cat projects.md": `# Projects
