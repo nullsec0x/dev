@@ -38,7 +38,7 @@ const commands = {
       Example: tech-stack
 
 Note: Commands are case-sensitive. Type them exactly as shown`,
-    ls: "about.md  projects.md  faq.md",
+    ls: "about.md  projects.md  faq.md  hackathons.md",
     "cat about.md": "I'm nullsec0x — a developer who loves low-level things, good UI, and breaking + building stuff.",
 
 "cat hackathons.md": `# Hackathons
