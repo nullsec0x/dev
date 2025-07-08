@@ -40,6 +40,27 @@ const commands = {
 Note: Commands are case-sensitive. Type them exactly as shown`,
     ls: "about.md  projects.md  faq.md",
     "cat about.md": "I'm nullsec0x — a developer who loves low-level things, good UI, and breaking + building stuff.",
+
+"cat hackathons.md": `# Hackathons
+
+## Hack Club ScrapYard (Casablanca, March 2025)
+    - 2-day hardware/software hackathon
+    - Theme: scrap stuff together, break things, win stuff
+    - Team: laformatik
+    - Built: Scrapy Meme Generator
+    - Link: <a href="https://nullsec0x.github.io" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io</a>
+    - Weird project. Did damage. Got prizes.
+
+## AI Crafters x Manus AI (July 2025)
+    - AI-focused hackathon (short format)
+    - Built: terminal-based system monitoring tool (Unix + Windows)
+    - Tech: Python (cross-platform, low dependency)
+    - Repo: <a href="https://github.com/nullsec0x/sysinfo" target="_blank" style="text-decoration: underline; color: inherit;">https://github.com/nullsec0x/sysinfo</a>
+    - My role: wrote all of it
+    - Made it to finals. Solid run.
+`,
+
+    
     "cat projects.md": `# Projects
   
   ## Random Meme Generator  
