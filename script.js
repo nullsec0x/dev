@@ -82,7 +82,7 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
 
   ## WatchWhat!  
   Can’t pick a movie? Spin the wheel and get a banger by vibe, year, or rating.  
-  <a href="https://nullsec0x.github.io/watchwhat" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/watchwhat</a>
+  <a href="https://nullsec0x.github.io/watchwhat/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/watchwhat/</a>
 
   ## What Is My IP Address?  
   No ads, no trackers, just your IP — clean, simple, sickass-styled.  
@@ -90,8 +90,22 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
 
   ## FocusFi  
   Helps you get stuff done… once your task list looks good.
-  <a href="https://nullsec0x.github.io/focusfi" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/focusfi</a>
+  <a href="https://nullsec0x.github.io/focusfi/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/focusfi/</a>
 
+  ## Dream Debugger
+  A simulation of a programmer's sleep and debugging, a sick and unique experience.
+  <a href="https://nullsec0x.github.io/dreamdebugger/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/dreamdebugger/</a>
+
+
+  ## Function Grapher
+  Graphs mathematical functions, an sick ass tool for visualization.
+  <a href="https://nullsec0x.github.io/functiongrapher/" target="_blank" style="text-decoration: underline; color: inherit;">https://nullsec0x.github.io/functiongrapher/</a>
+
+  ## SysInfo
+  A terminal-based Python tool that monitors system information for both UNIX and Windows.
+  <a href="https://github.com/nullsec0x/sysinfo/" target="_blank" style="text-decoration: underline; color: inherit;">https://github.com/nullsec0x/sysinfo/</a>
+
+ 
   More projects available on my <a href="https://github.com/nullsec0x" target="_blank" style="text-decoration: underline; color: inherit;">GitHub</a>!`,
     "cat faq.md": `# FAQ
   
