@@ -125,7 +125,7 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   A: React, Node.js, split keyboards, Linux, and anything open-source.
   
   **Q: Fun fact?**
-  A: I love my twinkpad more than anything :)`,
+  A: 9/11 was an inside job :3`,
 
   "tech-stack": `Nullsec0x’s Tech Stack 💻
   - Languages: JavaScript, Python, C++, CSS
