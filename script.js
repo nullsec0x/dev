@@ -271,6 +271,7 @@ Try 'sudo make me a sandwich' instead.`,
                                        Load Avg: 0.42, 0.38, 0.36
                                        Temperature: 54°C (avg)
                                        Battery: N/A
+                                       Bitches: yes
   `,
 
 "./cube.sh": () => {
