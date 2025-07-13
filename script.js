@@ -37,9 +37,26 @@ const commands = {
       Displays My Tech Stack 
       Example: tech-stack
 
+    light
+      Switches to light mode
+      Example: light
+
+    dark
+      Switches to dark mode
+      Example: dark
+
 Note: Commands are case-sensitive. Type them exactly as shown`,
     ls: "about.md  projects.md  faq.md  hackathons.md",
     "cat about.md": "I'm nullsec0x — a developer who loves low-level things, good UI, and breaking + building stuff.",
+
+    light: () => {
+        document.body.classList.add('light-mode');
+        appendLine('Switched to light mode.', 'output');
+    },
+    dark: () => {
+        document.body.classList.remove('light-mode');
+        appendLine('Switched to dark mode.', 'output');
+    },
 
 
     "cat hackathons.md": `# Hackathons
@@ -241,7 +258,7 @@ Try 'sudo make me a sandwich' instead.`,
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⡿⠀⠀⠀⠀⠀⠀          ------------------------
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀          OS: NullSecOS 13.37 Enterprise
   ⠀⠀⠀⢀⣠⣤⣤⣤⣀⣀⠈⠋⠉⣁⣠⣤⣤⣤⣀⡀⠀⠀          Kernel: 6.2.9-secure-rt
-  ⠀⢠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀          Uptime: 113 days, 21 hours, 57 mins
+  ⠀⢠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀          Uptime: 172 days, 18 hours, 58 mins
   ⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠀         Packages: 3127 (apt)
   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀         Shell: zsh 5.9
   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀         Resolution: 7680x4320 (8K UHD)
@@ -260,6 +277,9 @@ Try 'sudo make me a sandwich' instead.`,
     const cubeContainer = document.createElement('div');
     cubeContainer.id = 'cube-transition-container';
     cubeContainer.style.display = 'none';
+    
+    const isLightMode = document.body.classList.contains('light-mode');
+    
     cubeContainer.innerHTML = `
         <style>
             #cube-transition-container {
@@ -268,7 +288,7 @@ Try 'sudo make me a sandwich' instead.`,
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: #121212;
+                background: ${isLightMode ? '#CCCCCC' : '#121212'};
                 z-index: 1000;
                 opacity: 0;
                 transition: opacity 0.8s ease-out;
@@ -282,8 +302,9 @@ Try 'sudo make me a sandwich' instead.`,
                 border: none;
             }
         </style>
-        <iframe src="cube.html" id="cube-iframe"></iframe>
+        <iframe src="cube.html?light=${isLightMode}" id="cube-iframe"></iframe>
     `;
+    
     document.body.appendChild(cubeContainer);
     
     document.querySelector('.terminal-window').style.opacity = '0';
@@ -300,21 +321,16 @@ Try 'sudo make me a sandwich' instead.`,
     const escHandler = (e) => {
         if (e.key === 'Escape') {
             cubeContainer.classList.remove('show');
-            
             setTimeout(() => {
                 cubeContainer.style.display = 'none';
                 document.querySelector('.terminal-window').style.display = 'flex';
                 setTimeout(() => {
                     document.querySelector('.terminal-window').style.opacity = '1';
                     setTimeout(() => {
-                        window.scrollTo({
-                            top: document.body.scrollHeight,
-                            behavior: 'smooth'
-                        });
+                        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                         input.focus();
                     }, 50);
                 }, 50);
-                
                 document.removeEventListener('keydown', escHandler);
             }, 800);
         }
