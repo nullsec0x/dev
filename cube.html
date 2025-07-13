@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Cube Demo</title>
+    <link rel="icon" href="icon.ico" type="image/x-icon" />
+    <title>>_ Nullsec0x's Portfolio</title>
     <style>
         body {
             margin: 0;
@@ -91,6 +92,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
     <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const isLightMode = urlParams.get('light') === 'true';
+    
+        if (isLightMode) {
+            document.body.style.background = '#CCCCCC';
+            document.getElementById('quote').style.color = '#333';
+            document.getElementById('exit-text').style.color = '#333';
+        }
+    
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ 
@@ -98,15 +108,19 @@
             alpha: true,
             powerPreference: "high-performance"
         });
+        
+        renderer.setClearColor(isLightMode ? 0xCCCCCC : 0x1e1e1e, 1);
+        
         renderer.setSize(500, 500);
         document.getElementById('scene').appendChild(renderer.domElement);
         
-        const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
-        const edges = new THREE.EdgesGeometry(geometry);
         const lineMaterial = new THREE.LineBasicMaterial({ 
-            color: 0x00ff00,
+            color: isLightMode ? 0x333333 : 0x00ff00, 
             linewidth: 2
         });
+        
+        const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+        const edges = new THREE.EdgesGeometry(geometry);
         const cube = new THREE.LineSegments(edges, lineMaterial);
         scene.add(cube);
         
