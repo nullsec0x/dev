@@ -176,17 +176,6 @@ Try 'sudo make me a sandwich' instead.`,
           }, 1000);
     }, 
 
-    "sudo shutdown now": () => {
-      document.body.classList.add('crt-shutdown');
-
-          setTimeout(() => {
-              window.close(); 
-              if(!window.closed) {
-                  window.location.href = 'about:blank';
-              }
-          }, 1000);
-    }, 
-
   fraisazwina: `
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⣀⣄⣀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
