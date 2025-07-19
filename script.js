@@ -593,3 +593,38 @@ window.addEventListener("load", () => {
   input.focus();
   updateBlinker()
 });
+
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.altKey && e.key.toUpperCase() === 'U') {
+      e.preventDefault();
+      
+      console.log("%cWHAT YOU DOING OUT HERE BRUH >:(", "color: #ff80bf; font-size: 16px; font-weight: bold;");
+      console.log("%cNah just playing :P.%c\nIf you are reading this, you are awesome sauce :D", 
+                 "color: #8aff80; font-size: 14px;", 
+                 "color: #80b3ff; font-size: 12px;");
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.altKey && e.key.toUpperCase() === 'T') {
+    e.preventDefault();
+    console.clear();
+
+      console.log(
+      "%c(っ◔◡◔)っ Oh hi! You found this?\n" +
+      "%cWanna see how I made this portfolio?\n\n" +
+      "%c🔗 %cClick here → %chttps://www.youtube.com/watch?v=dQw4w9WgXcQ", 
+      "color: #ff80bf; font-size: 14px;",
+      "color: #8aff80; font-size: 14px;",
+      "color: #FFA500;",
+      "color: #FFF;",
+      "color: #00FF00; text-decoration: underline; cursor: pointer;"
+    );
+
+    const handleClick = () => {
+      if (window.getSelection().toString().includes('https://www.youtube.com/watch?v=dQw4w9WgXcQ')) {
+        window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+      }
+    };
+    document.addEventListener('click', handleClick);
+}});
