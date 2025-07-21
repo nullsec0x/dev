@@ -5,6 +5,14 @@ const blinker = document.getElementById("blinker");
 const history = [];
 let historyIndex = -1;
 
+function updatePrompt() {
+  const inputLinePrompt = document.querySelector('.line .prompt');
+  if (inputLinePrompt) {
+    const currentPrompt = window.sshMode ? "nullsec0x@ubuntustation ~ %" : "you@nullsec0x.dev ~ %";
+    inputLinePrompt.textContent = currentPrompt;
+  }
+}
+
 const commands = {
     help: `Available commands:
   
@@ -145,8 +153,8 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   A: 9/11 was an inside job :3`,
 
   "tech-stack": `Nullsec0x’s Tech Stack 💻
-  - Languages: JavaScript, Python, C++, CSS
-  - Frameworks: React, Node.js
+  - Languages: JavaScript, Python, C++, CSS, TypeScript, Ruby
+  - Frameworks: React, Node.js, Vue.js
   - OS: Linux (obviously)
   - Hardware: twinkpad, tinkering and more!`,
 
@@ -164,8 +172,8 @@ Try 'sudo make me a sandwich' instead.`,
     echo: (input) => input,
 
     "which $SHELL": "/bin/zsh",
-
-        "sudo shutdown -h now": () => {
+    
+    "sudo shutdown -h now": () => {
       document.body.classList.add('crt-shutdown');
 
           setTimeout(() => {
@@ -269,7 +277,7 @@ Try 'sudo make me a sandwich' instead.`,
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⡿⠀⠀⠀⠀⠀⠀          ------------------------
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀          OS: NullSecOS 13.37 Enterprise
   ⠀⠀⠀⢀⣠⣤⣤⣤⣀⣀⠈⠋⠉⣁⣠⣤⣤⣤⣀⡀⠀⠀          Kernel: 6.2.9-secure-rt
-  ⠀⢠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀          Uptime: 172 days, 18 hours, 58 mins
+  ⠀⢠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀          Uptime: 197 days, 07 hours, 13 mins
   ⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠀         Packages: 3127 (apt)
   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀         Shell: zsh 5.9
   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀         Resolution: 7680x4320 (8K UHD)
@@ -284,6 +292,90 @@ Try 'sudo make me a sandwich' instead.`,
                                        Battery: N/A
                                        Bitches: yes
   `,
+
+  matrix: () => {
+    const matrixContainer = document.createElement('div');
+    matrixContainer.id = 'matrix-container';
+    matrixContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 1000;
+        overflow: hidden;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        color: #00ff00;
+    `;
+    
+    const canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.cssText = `
+        display: block;
+        background: #000;
+    `;
+    
+    matrixContainer.appendChild(canvas);
+    document.body.appendChild(matrixContainer);
+    
+    const ctx = canvas.getContext('2d');
+    
+    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+    const matrixArray = matrix.split("");
+    
+    const fontSize = 10;
+    const columns = canvas.width / fontSize;
+    
+    const drops = [];
+    for(let x = 0; x < columns; x++) {
+        drops[x] = 1;
+    }
+    
+    function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#00ff00';
+        ctx.font = fontSize + 'px monospace';
+        
+        for(let i = 0; i < drops.length; i++) {
+            const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    
+    const interval = setInterval(draw, 35);
+    
+    const escHandler = (e) => {
+        if (e.key === 'Escape' || e.key === 'q') {
+            e.preventDefault();
+            e.stopPropagation();
+            clearInterval(interval);
+            document.body.removeChild(matrixContainer);
+            document.removeEventListener('keydown', escHandler);
+            input.focus();
+        }
+    };
+    
+    document.addEventListener('keydown', escHandler);
+    
+    setTimeout(() => {
+        if (document.getElementById('matrix-container')) {
+            clearInterval(interval);
+            document.body.removeChild(matrixContainer);
+            document.removeEventListener('keydown', escHandler);
+            input.focus();
+        }
+    }, 10000);
+},
 
 "./cube.sh": () => {
     const cubeContainer = document.createElement('div');
@@ -349,6 +441,12 @@ Try 'sudo make me a sandwich' instead.`,
     };
     
     document.addEventListener('keydown', escHandler);
+},
+
+"ssh nullsec0x@ubuntustation": () => {
+    window.sshMode = true;
+    updatePrompt();
+    appendLine("Connected to ubuntustation", "output");
 },
 
 "sudo rm -rf --no-preserve-root /": () => {
@@ -490,11 +588,28 @@ function processCommand(command) {
   const startMsg = terminal.querySelector('p.green');
   if (startMsg) startMsg.remove();
 
+  const currentPrompt = window.sshMode ? "nullsec0x@ubuntustation ~ %" : "you@nullsec0x.dev ~ %";
   const commandLine = document.createElement("div");
-  commandLine.innerHTML = `<span class="prompt">you@nullsec0x.dev ~ %</span> ${command}`;
+  commandLine.innerHTML = `<span class="prompt">${currentPrompt}</span> ${command}`;
   terminal.insertBefore(commandLine, input.parentElement);
 
   if (command === "") return;
+
+  if (command === "exit") {
+    if (window.sshMode) {
+      window.sshMode = false;
+      updatePrompt();
+      appendLine("Connection to ubuntustation closed.", "output");
+      setTimeout(() => terminal.scrollTop = terminal.scrollHeight, 0);
+      scrollToBottom();
+      return;
+    } else {
+      if (commands.exit && typeof commands.exit === "function") {
+        commands.exit();
+      }
+      return;
+    }
+  }
 
   if (command.startsWith("echo ")) {
         const textToEcho = command.substring(5); 
@@ -505,17 +620,25 @@ function processCommand(command) {
     }
 
   const output = commands[command];
+  
+  let sshOutput = null;
+  if (window.sshMode && typeof sshCommands !== 'undefined' && sshCommands[command]) {
+    sshOutput = sshCommands[command];
+  }
 
   if (output === "clear") {
     while (terminal.firstChild && terminal.firstChild !== input.parentElement) {
       terminal.removeChild(terminal.firstChild);
     }
+  } else if (sshOutput) {
+    appendLine(sshOutput, "output");
   } else if (typeof output === "function") {
     output();
   } else if (output) {
     appendLine(output, "output");
   } else {
-    appendLine(`nullsec0x.dev: command not found: ${command}`, "error");
+    const hostname = window.sshMode ? "ubuntustation" : "nullsec0x.dev";
+    appendLine(`${hostname}: command not found: ${command}`, "error");
   }
 
   setTimeout(() => terminal.scrollTop = terminal.scrollHeight, 0);
