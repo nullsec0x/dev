@@ -40,6 +40,10 @@ const commands = {
     github
       Opens my GitHub profile
       Example: github
+
+    instagram
+      Opens my Instagram profile
+      Example: instagram
   
     tech-stack
       Displays My Tech Stack 
@@ -66,6 +70,7 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
         appendLine('Switched to dark mode.', 'output');
     },
 
+    instagram: () => window.open("https://www.instagram.com/4f6d6172", "_blank"),
 
     "cat hackathons.md": `# Hackathons
 
