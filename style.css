@@ -96,6 +96,11 @@ flex-direction: column;
   white-space: pre-wrap;
 }
 
+.success {
+  color: #00ff00;
+  white-space: pre-wrap;
+}
+
 .error {
   color: #ff4c4c;
   white-space: pre-wrap;
@@ -218,6 +223,10 @@ background: #333;
 }
 
 .light-mode .output {
+color: #008000;
+}
+
+.light-mode .success {
 color: #008000;
 }
 
