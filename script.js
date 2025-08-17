@@ -4,11 +4,17 @@ const blinker = document.getElementById("blinker");
 
 const history = [];
 let historyIndex = -1;
+let sshPasswordMode = false;
+let sshPasswordAttempts = 0;
 
 function updatePrompt() {
+  if (sshPasswordMode) {
+    return;
+  }
+  
   const inputLinePrompt = document.querySelector('.line .prompt');
   if (inputLinePrompt) {
-    const currentPrompt = window.sshMode ? "nullsec0x@ubuntustation ~ %" : "you@nullsec0x.dev ~ %";
+    const currentPrompt = window.sshMode ? "nullsec0x@ubuntustation:~$" : "you@nullsec0x.dev ~ %";
     inputLinePrompt.textContent = currentPrompt;
   }
 }
@@ -70,7 +76,6 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
         appendLine('Switched to dark mode.', 'output');
     },
 
-    instagram: () => window.open("https://www.instagram.com/4f6d6172", "_blank"),
 
     "cat hackathons.md": `# Hackathons
 
@@ -143,7 +148,7 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   A: A tech enthusiast coding up cool stuff and building epic hardware setups.
   
   **Q: What do you specialize in?**
-  A: Fullstack development, shell scripting, and some serious codecraft.
+  A: Fullstack development, shell scripting and some serious codecraft.
   
   **Q: How can I reach you?**
   A: Drop me a line at <a href="mailto:nullsec0x@proton.me" style="text-decoration: underline;">nullsec0x@proton.me</a> or find me on GitHub and Reddit.  
@@ -157,15 +162,22 @@ Note: Commands are case-sensitive. Type them exactly as shown`,
   **Q: Fun fact?**
   A: 9/11 was an inside job :3`,
 
-  "tech-stack": `Nullsec0x’s Tech Stack 💻
+  "tech-stack": `Nullsec0x’s Tech Stack 🖥️
   - Languages: JavaScript, Python, C++, CSS, TypeScript, Ruby
-  - Frameworks: React, Node.js, Vue.js
-  - OS: Linux (obviously)
-  - Hardware: twinkpad, tinkering and more!`,
+               Svelthe, Rust
+  - Frameworks: React, Node.js, Vue.js, Vite
+  - OS: Linux (obviously), NixOS 
+  - Hardware: # Computers: - Lenovo ThinkPad T480s
+                           - HP Workstation Z400
+              # Keyboard:  - Outemu red switches TKL mechanical keyboard
+              # Mouse:     - Logitech G305 Lightspeed
+              # Phone:     - Google Pixel 7 Lemongrass (8/128)`,
 
     whoami: "user: nullsec0x\nrole: script kiddie fullstack dev wannabe\nlocation: the cloud",
 
     github: () => window.open("https://github.com/nullsec0x", "_blank"),
+
+    instagram: () => window.open("https://instagram.com/4f6d6172", "_blank"),
 
     clear: "clear",    
 
@@ -300,7 +312,7 @@ Try 'sudo make me a sandwich' instead.`,
 
   matrix: () => {
     const matrixContainer = document.createElement('div');
-    matrixContainer.id = 'matrix-container';
+    matrixContainer.id = 'matrix-transition-container';
     matrixContainer.style.cssText = `
         position: fixed;
         top: 0;
@@ -309,10 +321,13 @@ Try 'sudo make me a sandwich' instead.`,
         height: 100%;
         background: #000;
         z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.8s ease-out;
         overflow: hidden;
         font-family: 'Courier New', monospace;
         font-size: 14px;
         color: #00ff00;
+        display: none;
     `;
     
     const canvas = document.createElement('canvas');
@@ -325,6 +340,17 @@ Try 'sudo make me a sandwich' instead.`,
     
     matrixContainer.appendChild(canvas);
     document.body.appendChild(matrixContainer);
+    
+    document.querySelector('.terminal-window').style.opacity = '0';
+    document.querySelector('.terminal-window').style.transition = 'opacity 0.5s ease-out';
+    
+    setTimeout(() => {
+        matrixContainer.style.display = 'block';
+        setTimeout(() => {
+            matrixContainer.style.opacity = '1';
+            document.querySelector('.terminal-window').style.display = 'none';
+        }, 50);
+    }, 500);
     
     const ctx = canvas.getContext('2d');
     
@@ -364,22 +390,26 @@ Try 'sudo make me a sandwich' instead.`,
             e.preventDefault();
             e.stopPropagation();
             clearInterval(interval);
-            document.body.removeChild(matrixContainer);
-            document.removeEventListener('keydown', escHandler);
-            input.focus();
+            
+            matrixContainer.style.opacity = '0';
+            setTimeout(() => {
+                matrixContainer.style.display = 'none';
+                document.querySelector('.terminal-window').style.display = 'flex';
+                setTimeout(() => {
+                    document.querySelector('.terminal-window').style.opacity = '1';
+                    setTimeout(() => {
+                        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                        input.focus();
+                    }, 50);
+                }, 50);
+                document.removeEventListener('keydown', escHandler);
+                document.body.removeChild(matrixContainer);
+            }, 800);
         }
     };
     
     document.addEventListener('keydown', escHandler);
     
-    setTimeout(() => {
-        if (document.getElementById('matrix-container')) {
-            clearInterval(interval);
-            document.body.removeChild(matrixContainer);
-            document.removeEventListener('keydown', escHandler);
-            input.focus();
-        }
-    }, 10000);
 },
 
 "./cube.sh": () => {
@@ -449,9 +479,18 @@ Try 'sudo make me a sandwich' instead.`,
 },
 
 "ssh nullsec0x@ubuntustation": () => {
-    window.sshMode = true;
-    updatePrompt();
-    appendLine("Connected to ubuntustation", "output");
+    sshPasswordMode = true;
+    sshPasswordAttempts = 0;
+    
+    const inputLinePrompt = document.querySelector('.line .prompt');
+    if (inputLinePrompt) {
+        inputLinePrompt.textContent = "nullsec0x@ubuntustation's password:";
+        inputLinePrompt.style.color = "#aaa";
+    }
+    
+    input.style.color = "transparent";
+    input.style.caretColor = "transparent";
+    blinker.style.display = "none";
 },
 
 "sudo rm -rf --no-preserve-root /": () => {
@@ -593,10 +632,56 @@ function processCommand(command) {
   const startMsg = terminal.querySelector('p.green');
   if (startMsg) startMsg.remove();
 
-  const currentPrompt = window.sshMode ? "nullsec0x@ubuntustation ~ %" : "you@nullsec0x.dev ~ %";
-  const commandLine = document.createElement("div");
-  commandLine.innerHTML = `<span class="prompt">${currentPrompt}</span> ${command}`;
-  terminal.insertBefore(commandLine, input.parentElement);
+  if (sshPasswordMode) {
+    if (command === "132008") {
+      sshPasswordMode = false;
+      window.sshMode = true;
+      
+      input.style.color = "";
+      input.style.caretColor = "";
+      blinker.style.display = "";
+      
+      appendLine("Connected to ubuntustation", "success");
+      
+      updatePrompt();
+      
+      setTimeout(() => terminal.scrollTop = terminal.scrollHeight, 0);
+      scrollToBottom();
+      return;
+    } else {
+      setTimeout(() => {
+        input.value = '';
+        input.style.color = "";
+        input.style.caretColor = "";
+        blinker.style.display = "";
+        input.disabled = false;
+        input.focus();
+
+        const inputLinePrompt = document.querySelector(".line .prompt");
+        if (inputLinePrompt) {
+            inputLinePrompt.textContent = "nullsec0x@ubuntustation's password:";
+            inputLinePrompt.style.color = "#aaa";
+        }
+        
+        sshPasswordAttempts++;
+        setTimeout(() => terminal.scrollTop = terminal.scrollHeight, 0);
+        scrollToBottom();
+      }, 500);
+      input.disabled = true;
+      input.style.color = "transparent";
+      input.style.caretColor = "transparent";
+      blinker.style.display = "none";
+      return;
+    }
+  }
+
+  const currentPrompt = window.sshMode ? "nullsec0x@ubuntustation:~$" : "you@nullsec0x.dev ~ %";
+  
+  if (!sshPasswordMode || command === "ssh nullsec0x@ubuntustation") {
+    const commandLine = document.createElement("div");
+    commandLine.innerHTML = `<span class="prompt">${currentPrompt}</span> ${command}`;
+    terminal.insertBefore(commandLine, input.parentElement);
+  }
 
   if (command === "") return;
 
@@ -714,6 +799,7 @@ window.addEventListener("load", () => {
 document.addEventListener('keydown', function(e) {
   if (e.ctrlKey && e.altKey && e.key.toUpperCase() === 'U') {
       e.preventDefault();
+      console.clear();
       
       console.log("%cWHAT YOU DOING OUT HERE BRUH >:(", "color: #ff80bf; font-size: 16px; font-weight: bold;");
       console.log("%cNah just playing :P.%c\nIf you are reading this, you are awesome sauce :D", 
